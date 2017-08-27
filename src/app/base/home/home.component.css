@@ -1,0 +1,9 @@
+.centre {
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -150px;
+  margin-top: -150px;
+}
