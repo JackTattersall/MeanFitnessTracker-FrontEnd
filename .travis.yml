@@ -2,6 +2,9 @@ language: node_js
 node_js:
   - "node"
 
+notifications:
+    slack: angrybeaversteam:7Udv7IhMMAkQrgaw5VjEclEX
+
 before_install:
  - export CHROME_BIN=/usr/bin/google-chrome
  - export DISPLAY=:99.0
