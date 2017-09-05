@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label class="control-label" for="register-first-name">First Name</label>
+        <input class="form-control" type="text" name="first-name" id="register-first-name" placeholder="First Name" formControlName="firstName">
+        <div id="register-name-required" *ngIf="firstName.invalid && firstName.touched" class="validation-text">Required</div>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="register-second-name">Second Name</label>
+        <input class="form-control" type="text" name="second-name" id="register-second-name" placeholder="Second Name" formControlName="secondName">
+        <div id="register-second-name-required" *ngIf="secondName.invalid && secondName.touched" class="validation-text">Required</div>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="register-email">Email</label>
+        <input class="form-control" type="email" name="email" id="register-email" placeholder="Email" formControlName="email">
+        <div *ngIf="email.invalid && email.touched">
+          <div id="register-email-required" *ngIf="email.errors.required" class="validation-text">Required</div>
+          <div id="register-email-valid" *ngIf="email.errors.email && email.value" class="validation-text">Must be a valid email</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="register-password">Password</label>
+        <input class="form-control" type="password" name="password" id="register-password" placeholder="Password" formControlName="passwordOne">
+        <div *ngIf="passwordOne.invalid && passwordOne.touched">
+          <div id="register-password-required" *ngIf="passwordOne.errors.required" class="validation-text">Required</div>
+          <div id="register-password-valid" *ngIf="passwordOne.errors.minlength" class="validation-text">Must be at least 6 characters long</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="register-retype-password">Re-Type Password</label>
+        <input class="form-control" type="password" name="retype-password" id="register-retype-password" placeholder="Re-Type Password" formControlName="passwordTwo">
+        <div *ngIf="passwordTwo.invalid && passwordTwo.touched">
+          <div id="register-pass-two-required" *ngIf="passwordTwo.errors.required" class="validation-text">Required</div>
+          <div id="register-pass-valid" *ngIf="passwordTwo.errors.minlength" class="validation-text">Must be at least 6 characters long</div>
+          <div id="register-passwords-match" *ngIf="passwordOne.value !== passwordTwo.value" class="validation-text">Passwords must match</div>
+        </div>
+      </div>
+      <button type="button" class="btn" (click)="onSubmit()" [disabled]="!registerForm.valid">Register</button>
+    </form>
+  </div>
+</div>

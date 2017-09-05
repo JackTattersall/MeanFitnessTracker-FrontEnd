@@ -1,17 +1,24 @@
 <div class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a routerLink class="navbar-brand">Fitness Tracker</a>
+      <a routerLink="/" class="navbar-brand">Fitness Tracker</a>
     </div>
     <div class="navbar-default">
       <ul class="nav navbar-nav">
-        <li><a>Exercises</a></li>
-        <li><a>Vitals</a></li>
-        <li><a>History</a></li>
+        <ng-template [ngIf]="isLoggedIn()">
+          <li><a>Exercises</a></li>
+          <li><a>Vitals</a></li>
+          <li><a>History</a></li>
+        </ng-template>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a>Login</a></li>
-        <li><a>Logout</a></li>
+        <ng-template [ngIf]="!isLoggedIn()">
+          <li><a routerLink="/login">Login</a></li>
+          <li><a routerLink="/register">Register</a></li>
+        </ng-template>
+        <ng-template [ngIf]="isLoggedIn()">
+          <li style="cursor: pointer"><a (click)="onLogout()">Logout</a></li>
+        </ng-template>
       </ul>
     </div>
   </div>
