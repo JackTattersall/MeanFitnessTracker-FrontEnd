@@ -2,3 +2,21 @@
 .validation-text {
   color: red;
 }
+
+body {
+  background-color: #202020!important;
+}
+
+a {
+  color: #f66f00!important;
+}
+
+label {
+  color: #f66f00!important;
+}
+
+input {
+  background-color: #333!important;
+  border-color: #EE2024!important;
+  color: white!important;
+}

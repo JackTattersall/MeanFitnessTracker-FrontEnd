@@ -1,4 +1,4 @@
-<div class="navbar navbar-default">
+<div id="nav-main" class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a routerLink="/" class="navbar-brand">Fitness Tracker</a>
@@ -7,7 +7,7 @@
       <ul class="nav navbar-nav">
         <ng-template [ngIf]="isLoggedIn()">
           <li><a>Exercises</a></li>
-          <li><a>Vitals</a></li>
+          <li><a routerLink="/vitals">Vitals</a></li>
           <li><a>History</a></li>
         </ng-template>
       </ul>

@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import {browser, by, element} from 'protractor';
 
 export class FitnessTrackerPage {
   navigateTo() {
@@ -9,3 +9,5 @@ export class FitnessTrackerPage {
     return element(by.css('app-root h3')).getText();
   }
 }
+
+

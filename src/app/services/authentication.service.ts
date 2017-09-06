@@ -3,48 +3,88 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/Rx";
+import {environment} from "../../environments/environment";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class AuthenticationService {
+  userChanged = new Subject<User>();
   private user: User = null;
 
-  constructor(private http: Http) {}
+  private headers = new Headers({
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  });
 
+  constructor(private http: Http) {
+  }
+
+  // Registers a new user returns an Observable
   register(user: User) {
     const body = JSON.stringify(user);
 
-    let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append("Accept", "application/json");
-
-    return this.http.post('http://localhost:8080/users', body, {headers: headers})
+    return this.http.post(environment.apiUrl + '/users', body, {headers: this.headers})
       .map((response: Response) => response.json())
       .catch((err: Response) => Observable.throw(err.json()));
   }
 
+  // Signs in a user returns an observable
   signIn(user: User) {
     const body = JSON.stringify(user);
 
-    let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append("Accept", "application/json");
-
-    return this.http.post('http://localhost:8080/users/signin', body, {headers: headers})
+    return this.http.post(environment.apiUrl + '/users/signin', body, {headers: this.headers})
       .map((response: Response) => response.json())
       .catch((err: Response) => Observable.throw(err.json()));
   }
 
+  // Gets a user returns an observable
+  getUserById(id : string) {
+    const getRequestHeaders = this.headers;
+    getRequestHeaders.append('jwt', this.getJwt());
+
+    return this.http.get(environment.apiUrl + '/users/' + id, {headers: getRequestHeaders})
+      .map((response: Response) => response.json())
+      .catch((err: Response) => Observable.throw(err.json()))
+  }
+
+  // Logs a user out
   logout() {
     localStorage.clear()
   }
 
+  // Sets this user and emits the next subscription
   setUser(user: User) {
     this.user = user;
+    this.userChanged.next(this.user);
   }
 
+  // Returns true if logged in
   isLoggedIn() {
-    return localStorage.getItem('jwt') !== null;
+    return this.getJwt() !== null && this.getUserId() !== null
   }
 
+  // Will return this user, or if user null (a la page refresh), re-fetches user
   getUser() {
-    return this.user
+    if (this.user === null && this.isLoggedIn())
+      this.getUserById(this.getUserId())
+        .subscribe(
+          data => {
+            this.user = new User(data.email, '******', data.firstName, data.secondName)
+            this.userChanged.next(this.user);
+          },
+          err => console.error('no user')
+        );
+    else
+      this.userChanged.next(this.user)
+  }
+
+  // Get the current jwt token stored
+  getJwt() {
+    return localStorage.getItem('jwt')
+  }
+
+  // Get the current user id stored
+  getUserId() {
+    return localStorage.getItem('userId')
   }
 }

@@ -14,6 +14,9 @@ import {HttpClientModule} from "@angular/common/http";
 import { RegisterSuccessComponent } from './auth/register-success/register-success.component';
 import { RegisterFailureComponent } from './auth/register-failure/register-failure.component';
 import { RegisterEmailSentComponent } from './auth/register-email-sent/register-email-sent.component';
+import { VitalsComponent } from './vitals/vitals.component';
+import {AuthGuard} from "./auth/guards/auth-guard.service";
+import {TitalisePipe} from "./shared/pipes/titalise.pipe";
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { RegisterEmailSentComponent } from './auth/register-email-sent/register-
     RegisterComponent,
     RegisterSuccessComponent,
     RegisterFailureComponent,
-    RegisterEmailSentComponent
+    RegisterEmailSentComponent,
+    VitalsComponent,
+    TitalisePipe
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ import { RegisterEmailSentComponent } from './auth/register-email-sent/register-
     FormsModule,
     HttpModule,
   ],
-  providers: [AuthenticationService, FormBuilder],
+  providers: [AuthenticationService, FormBuilder, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

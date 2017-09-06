@@ -1,7 +1,23 @@
-<app-header></app-header>
-<div class="row">
-  <div class="col-xs-10 col-xs-offset-1">
-    <router-outlet></router-outlet>
+<div id="topbg"></div>
+<div id="main">
+  <div id="header">
+    <div id="hdr-overlay"></div>
+  </div>
+  <app-header></app-header>
+  <div class="row">
+    <div class="col-xs-12">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
-
+<footer class="footer">
+  <div class="col-xs-4">
+    <p>Contact</p>
+  </div>
+  <div class="col-xs-4">
+    <p>Conditions</p>
+  </div>
+  <div class="col-xs-4">
+    <p>Terms</p>
+  </div>
+</footer>

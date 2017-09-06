@@ -1,0 +1,12 @@
+#nav-main {
+  border-color: #333;
+  background-color: #333;
+}
+
+a {
+  color: #f66f00!important;
+}
+
+.navbar {
+  border-radius: 0!important;
+}

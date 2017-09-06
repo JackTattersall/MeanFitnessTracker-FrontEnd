@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value)
     const user = new User(
       this.email.value,
       this.password.value
@@ -33,7 +32,11 @@ export class LoginComponent implements OnInit {
         data => {
           localStorage.setItem('jwt', data.jwt);
           localStorage.setItem('userId', data.userId);
+          this.authService.setUser(
+            new User(data.email, '******', data.firstName, data.secondName)
+          );
           this.router.navigate(['/'], {relativeTo: this.route});
+          console.log('hi' + data.firstName);
         },
         err => {
           this.loginForm.reset();

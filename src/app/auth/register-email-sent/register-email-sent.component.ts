@@ -7,14 +7,10 @@ import {AuthenticationService} from "../../services/authentication.service";
   styleUrls: ['./register-email-sent.component.css']
 })
 export class RegisterEmailSentComponent implements OnInit {
-  userName: string;
 
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
-    if (this.authService.getUser()) {
-      this.userName = this.authService.getUser().first_name;
-    }
   }
 
 }

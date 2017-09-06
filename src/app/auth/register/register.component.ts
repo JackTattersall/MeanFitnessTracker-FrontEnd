@@ -24,9 +24,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.registerForm.value);
-    console.log(this.registerForm.status);
-    console.log(this.registerForm.get('firstName').value);
 
     if (this.registerForm.valid && this.passwordsMatch()) {
       const user = new User(
