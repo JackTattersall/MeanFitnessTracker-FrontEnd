@@ -69,7 +69,12 @@ export class AuthenticationService {
       this.getUserById(this.getUserId())
         .subscribe(
           data => {
-            this.user = new User(data.email, '******', data.firstName, data.secondName)
+            let newUser = new User();
+            newUser.firstName = data.firstName;
+            newUser.email = data.email;
+            newUser.secondName = data.secondName;
+
+            this.user = newUser;
             this.userChanged.next(this.user);
           },
           err => console.error('no user')

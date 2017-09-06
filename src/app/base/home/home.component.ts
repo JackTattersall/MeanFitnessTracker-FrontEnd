@@ -9,7 +9,7 @@ import {Subscription} from "rxjs/Subscription";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  user: User = new User('', '', '', '');
+  user: User = new User();
   userSub: Subscription;
 
   constructor(private authService: AuthenticationService) { }
@@ -20,7 +20,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.userSub = this.authService.userChanged
       .subscribe(
         (user) => {
-          this.user = new User(user.email, '******', user.first_name, user.second_name);
+          let newUser = new User();
+          newUser.email = user.email;
+          newUser.firstName = user.firstName;
+          newUser.secondName = user.secondName;
+          this.user = newUser;
         }
       );
 
@@ -32,5 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     // Manually un-subscribe
     this.userSub.unsubscribe();
   }
+
+  // todo make frontend and backend variable names match, thisVar instead of this_var
+  // todo remove User fields from constructor so we don't have to keep providing dummy Password
 }
 

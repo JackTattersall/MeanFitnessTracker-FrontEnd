@@ -26,17 +26,16 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
 
     if (this.registerForm.valid && this.passwordsMatch()) {
-      const user = new User(
-        this.registerForm.get('email').value,
-        this.registerForm.get('passwordOne').value,
-        this.registerForm.get('firstName').value,
-        this.registerForm.get('secondName').value,
-        false
-      );
+      let newUser = new User();
+      newUser.email = this.registerForm.get('email').value;
+      newUser.firstName = this.registerForm.get('firstName').value;
+      newUser.secondName = this.registerForm.get('secondName').value;
+      newUser.password = this.registerForm.get('passwordOne').value;
+      newUser.isVerified = false;
 
-      this.authService.register(user).subscribe(
+      this.authService.register(newUser).subscribe(
         data => {
-          this.authService.setUser(user);
+          this.authService.setUser(newUser);
           this.router.navigate(['sent'], {relativeTo: this.route})
         },
         err => this.registerForm.reset()

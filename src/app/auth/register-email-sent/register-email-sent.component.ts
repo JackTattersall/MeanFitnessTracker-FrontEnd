@@ -8,7 +8,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 })
 export class RegisterEmailSentComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService) { }
+  constructor() { }
 
   ngOnInit() {
   }

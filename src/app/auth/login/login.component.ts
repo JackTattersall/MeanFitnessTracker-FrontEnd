@@ -22,21 +22,23 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const user = new User(
-      this.email.value,
-      this.password.value
-    );
+    const user = new User();
+    user.email = this.email.value;
+    user.password = this.password.value;
 
     this.authService.signIn(user)
       .subscribe(
         data => {
           localStorage.setItem('jwt', data.jwt);
           localStorage.setItem('userId', data.userId);
-          this.authService.setUser(
-            new User(data.email, '******', data.firstName, data.secondName)
-          );
+
+          let newUser = new User();
+          newUser.email = data.email;
+          newUser.firstName = data.firstName;
+          newUser.secondName = data.secondName;
+          this.authService.setUser(newUser);
+
           this.router.navigate(['/'], {relativeTo: this.route});
-          console.log('hi' + data.firstName);
         },
         err => {
           this.loginForm.reset();
