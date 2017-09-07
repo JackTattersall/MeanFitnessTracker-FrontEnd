@@ -83,4 +83,24 @@ describe('AuthenticationService without the TestBed', () => {
     expect(isLoggedInSpy).toHaveBeenCalled();
   });
 
+  it('logout should clear local storage', () => {
+    service.logout();
+
+    expect(localStorage.length).toBe(0);
+  });
+
+  it('isLoggedIn should return true only if jwt and userId exist in localStorage', () => {
+    localStorage.clear();
+
+    expect(service.isLoggedIn()).toBeFalsy();
+
+    localStorage.setItem('jwt', 'key');
+
+    expect(service.isLoggedIn()).toBeFalsy();
+
+    localStorage.setItem('userId', '1234');
+
+    expect(service.isLoggedIn()).toBeTruthy();
+  });
+
 });
