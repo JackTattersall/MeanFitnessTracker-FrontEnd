@@ -77,7 +77,7 @@ export class AuthenticationService {
             this.user = newUser;
             this.userChanged.next(this.user);
           },
-          err => console.error('no user')
+          err =>  console.error('no user')
         );
     else
       this.userChanged.next(this.user)
@@ -92,4 +92,6 @@ export class AuthenticationService {
   getUserId() {
     return localStorage.getItem('userId')
   }
+
+  get currentUser(){ return this.user };
 }

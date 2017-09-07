@@ -39,4 +39,22 @@ describe('HeaderComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('auth service logout should be called on logout', () => {
+    component.onLogout();
+    fixture.detectChanges();
+    expect(mockAuthService.logout).toHaveBeenCalled();
+  });
+
+  it('auth service isLoggedIn should be called on isLoggedIn', () => {
+    component.isLoggedIn();
+    fixture.detectChanges();
+    expect(mockAuthService.isLoggedIn).toHaveBeenCalled();
+  });
+
+  it('router navigate should be called on logout', () => {
+    component.onLogout();
+    fixture.detectChanges();
+    expect(mockRouter.navigate).toHaveBeenCalled();
+  })
 });

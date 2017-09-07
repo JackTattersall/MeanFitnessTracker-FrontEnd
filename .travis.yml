@@ -13,3 +13,16 @@ before_install:
  - sudo apt-get install -y libappindicator1 fonts-liberation
  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
  - sudo dpkg -i google-chrome*.deb
+
+before_script:
+- npm install -g codecov
+- npm install coveralls
+- npm install
+- ng lint
+- ng build --aot --prod
+- ng serve & ng e2e
+- ng test --watch=false --code-coverage
+
+script:
+- codecov
+- cat ./coverage/coverage.lcov | ./node_modules/coveralls/bin/coveralls.js
