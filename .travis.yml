@@ -1,20 +1,17 @@
 language: node_js
 node_js:
-  - "node"
-
+- node
 notifications:
-    slack: "Nva1VaJjUlwXjjFrhL32kkfFc/0MZWYlq3HIwi/PjPKvG4j7xjxtxo94cuWt0kjtZd68jPBRy8tpzejeMSiplIhTVnZNNCtuhuW0MS+idqBEgKe/kJ2HaD1rRmEczgg2FpPbalIZQ2eut8ezlB6eByt/h/H+R/xMtIO8cWOX4yO0+LhaxGh75JzW7jfF2S4wX89bib3t0TXLFVhXx54h7xQzR+8O/y4F8SYiJBdkdpyhsfUAonPZkFp1S6YcIHT5xYMjs1tOkLsH0HdUpSf+9srXvRgAxZ4bhBWpXVtg9b5HW/tqCPs+iqPJN+RzudJHcpyr0wYN6J0wkCQxK4jfrdddRPa5Xegk65lH+EbfflshbhXwzf9pzgdlYZ0AQCMJQvBfL+XGlFRHj8K3xkwDjSo7PirGzeWRXJeGFf8EZnX9ILYKl08QNwVE4ALHfVXGPz+taDYcoJKaD2VZCVeaY/uPvlWDh8DxXXaJwDv3B/qqK/594WpMn/nuwH5CKheTJMGCvj4wHlBU1REZ+Dte6yxLIbffEEL95Xj/3h2jBMtJqOyDGSGX7Ht0iq0NpDi+nuoOV78XFgKe85CLb5v5lWD/NvKHYbN82XbVIcERMD+GD7kf4vdhaJ7OQ68MxmBW/itkwl+X7QT5CMJo74bzgHkqFomZOxnZpzRwk+XZik0="
-
-
+  slack:
+    secure: XoIVkiudsfwOXB0xWpNomeFHBdInY7m1d+ZjVn95O1KJnwtQZQwOICA+0yk5als0OcfyEPOFQSPp42TZ/5yNkTn/ej5siTyVMrD9d4e/A51Vlef6s3a+VARce/F9plgIf38V626i8eYa5slNDvs5sbyBD8C4nZPvpRl5RDDK4JEkGm+74N6UouqV8Xtgg2AVyNxVNZCE0cvtU5ioDEmR8iYMxD/0qskqlh8G+swLLk5pN2nFp8Z9OTBdxDefgTD7bIoRCZqu+omlyINr6ye1/yQL4YmGOBrTr1XKiW3f5noxDri8lxSjUbEPasNxwIhev3QZ9IV2DFE7fPnp33gmvGXUdP+1+KtdsXufclB1SstIpo22dTs9zmujo25dgL4OSMrSg9a6S7szO5Z0WM8a0qJweeUIkSPiSgVkhwEc2buGE49OTh4ZtcNvg57cUjMa1A2gVYGrHrlbi1TMVREZdKZRfPtpKMzlBAwvXAMukRSaBS8repJCZhRQeh/jboo83u5eYTVZh2yjQUyY2vlw8a6FKihYCaqa+0xm5BUbK2FJo+5I4mrnnF3wlnFOm2xz76yGtZszlSDlleaXGXHPu/OqaFe274LU//JAYMkoVc/PLu0/9P11pKnSA1YHEPLGJbhKtEfKbj8f6NIxFfwPZK6/K0bPI8ZevFcLG5HcKwk=
 before_install:
- - export CHROME_BIN=/usr/bin/google-chrome
- - export DISPLAY=:99.0
- - sh -e /etc/init.d/xvfb start
- - sudo apt-get update
- - sudo apt-get install -y libappindicator1 fonts-liberation
- - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
- - sudo dpkg -i google-chrome*.deb
-
+- export CHROME_BIN=/usr/bin/google-chrome
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sudo apt-get update
+- sudo apt-get install -y libappindicator1 fonts-liberation
+- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+- sudo dpkg -i google-chrome*.deb
 before_script:
 - npm install -g codecov
 - npm install coveralls
@@ -23,7 +20,6 @@ before_script:
 - ng build --aot --prod
 - ng serve & ng e2e
 - ng test --watch=false --code-coverage
-
 script:
 - codecov
 - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
