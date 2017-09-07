@@ -36,7 +36,7 @@ export class LoginPage {
 
   getPasswordRequiredText() {
     browser.wait(this.until.presenceOf(element(by.id('login-password-required'))), 5000, 'Element taking too long to appear in the DOM');
-    return element(by.id('login-assword-required')).getText();
+    return element(by.id('login-password-required')).getText();
   }
 
   submitButton() {
