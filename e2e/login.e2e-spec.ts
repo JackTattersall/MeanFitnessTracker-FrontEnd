@@ -1,4 +1,4 @@
-import {LoginPage} from "./login.po";
+import {LoginPage} from './login.po';
 
 describe('fitness-tracker Login', () => {
   let page: LoginPage;

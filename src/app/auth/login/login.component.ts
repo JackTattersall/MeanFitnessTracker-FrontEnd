@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthenticationService} from "../../services/authentication.service";
-import {User} from "../../models/user.model";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthenticationService} from '../../services/authentication.service';
+import {User} from '../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.initForm()
+    this.initForm();
   }
 
   onSubmit() {
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('jwt', data.jwt);
           localStorage.setItem('userId', data.userId);
 
-          let newUser = new User();
+          const newUser = new User();
           newUser.email = data.email;
           newUser.firstName = data.firstName;
           newUser.secondName = data.secondName;
@@ -42,9 +42,9 @@ export class LoginComponent implements OnInit {
         },
         err => {
           this.loginForm.reset();
-          console.error(err)
+          console.error(err);
         }
-      )
+      );
   }
 
   initForm() {
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  get email() { return this.loginForm.get('email') }
-  get password() { return this.loginForm.get('password') }
+  get email() { return this.loginForm.get('email'); }
+  get password() { return this.loginForm.get('password'); }
 
 }

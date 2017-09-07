@@ -1,8 +1,8 @@
-import {AuthenticationService} from "./authentication.service";
-import {Http, RequestOptions, Headers} from "@angular/http";
-import {MockBackend} from "@angular/http/testing";
-import {Observable} from "rxjs/Observable";
-import {User} from "../models/user.model";
+import {AuthenticationService} from './authentication.service';
+import {Http, RequestOptions} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
+import {Observable} from 'rxjs/Observable';
+import {User} from '../models/user.model';
 import Spy = jasmine.Spy;
 
 describe('AuthenticationService without the TestBed', () => {
@@ -32,7 +32,7 @@ describe('AuthenticationService without the TestBed', () => {
     user.firstName = 'lo';
     service.register(user);
     expect(postSpy).toHaveBeenCalled();
-    expect(postSpy).toHaveBeenCalledWith('http://localhost:8080/users', '{"firstName":"lo"}', jasmine.any(Object))
+    expect(postSpy).toHaveBeenCalledWith('http://localhost:8080/users', '{"firstName":"lo"}', jasmine.any(Object));
   });
 
   it('signIn should send post request', () => {
@@ -40,13 +40,13 @@ describe('AuthenticationService without the TestBed', () => {
     user.firstName = 'lo';
     service.signIn(user);
     expect(postSpy).toHaveBeenCalled();
-    expect(postSpy).toHaveBeenCalledWith('http://localhost:8080/users/signin', '{"firstName":"lo"}', jasmine.any(Object))
+    expect(postSpy).toHaveBeenCalledWith('http://localhost:8080/users/signin', '{"firstName":"lo"}', jasmine.any(Object));
   });
 
   it('getUserByID should send get request', () => {
     service.getUserById('12west');
     expect(getSpy).toHaveBeenCalled();
-    expect(getSpy).toHaveBeenCalledWith('http://localhost:8080/users/12west', jasmine.any(Object))
+    expect(getSpy).toHaveBeenCalledWith('http://localhost:8080/users/12west', jasmine.any(Object));
   });
 
   it('setUser should initialize user and also emit next fro userChanged', () => {

@@ -40,14 +40,14 @@ export class LoginPage {
   }
 
   submitButton() {
-    return element(by.id('login-submit'))
+    return element(by.id('login-submit'));
   }
 
   clickEmail() {
-    element(by.id('login-email')).click()
+    element(by.id('login-email')).click();
   }
 
   clickPassword() {
-    element(by.id('login-password')).click()
+    element(by.id('login-password')).click();
   }
 }

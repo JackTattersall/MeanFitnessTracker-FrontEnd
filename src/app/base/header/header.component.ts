@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from "../../services/authentication.service";
-import {Router} from "@angular/router";
+import {AuthenticationService} from '../../services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +22,6 @@ export class HeaderComponent implements OnInit {
   }
 
   isLoggedIn() {
-    return this.authService.isLoggedIn()
+    return this.authService.isLoggedIn();
   }
 }

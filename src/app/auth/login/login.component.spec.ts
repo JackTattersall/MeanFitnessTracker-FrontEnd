@@ -1,27 +1,27 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
-import {Subject} from "rxjs/Subject";
-import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthenticationService} from "../../services/authentication.service";
+import {Subject} from 'rxjs/Subject';
+import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthenticationService} from '../../services/authentication.service';
 import has = Reflect.has;
-import {Observable} from "rxjs/Observable";
-import {User} from "../../models/user.model";
-import {By} from "@angular/platform-browser";
+import {Observable} from 'rxjs/Observable';
+import {User} from '../../models/user.model';
+import {By} from '@angular/platform-browser';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
 
-  class StubUser{
-    constructor(private firstName, private secondName, private email, private jwt, private userId){}
+  class StubUser {
+    constructor(private firstName, private secondName, private email, private jwt, private userId) {}
   }
 
   const testUser = new StubUser('jack', 'tatts', 'jack@tatt', 'jwt', 1);
 
-  let mockAuth = {
+  const mockAuth = {
     signIn: () => Observable.of(testUser),
     setUser: jasmine.createSpy('setUser')
   };
@@ -74,7 +74,7 @@ describe('LoginComponent', () => {
   });
 
   it('onSubmit should initialize user and call setUser, set jwt and id and call navigate', () => {
-    let expectedUser = new User();
+    const expectedUser = new User();
     expectedUser.email = 'jack@tatt';
     expectedUser.firstName = 'jack';
     expectedUser.secondName = 'tatts';
@@ -92,8 +92,8 @@ describe('LoginComponent', () => {
 
     const emailInput = fixture.debugElement.query(By.css('#login-email'));
     const passwordInput = fixture.debugElement.query(By.css('#login-password'));
-    let emailInputElement = emailInput.nativeElement;
-    let passwordInputElement = passwordInput.nativeElement;
+    const emailInputElement = emailInput.nativeElement;
+    const passwordInputElement = passwordInput.nativeElement;
 
     emailInputElement.value = 'jim@jim';
     passwordInputElement.value = 'pass';
@@ -112,8 +112,8 @@ describe('LoginComponent', () => {
 
     const emailInput = fixture.debugElement.query(By.css('#login-email'));
     const passwordInput = fixture.debugElement.query(By.css('#login-password'));
-    let emailInputElement = emailInput.nativeElement;
-    let passwordInputElement = passwordInput.nativeElement;
+    const emailInputElement = emailInput.nativeElement;
+    const passwordInputElement = passwordInput.nativeElement;
 
     emailInputElement.value = 'jim@jim';
     passwordInputElement.value = 'pass';
@@ -127,5 +127,5 @@ describe('LoginComponent', () => {
 
     expect(component.email.value).toEqual(null);
     expect(component.password.value).toEqual(null);
-  })
+  });
 });

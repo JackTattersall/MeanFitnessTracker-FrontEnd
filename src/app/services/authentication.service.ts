@@ -1,10 +1,10 @@
-import {User} from "../models/user.model";
-import {Injectable} from "@angular/core";
-import {Headers, Http, Response} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import "rxjs/Rx";
-import {environment} from "../../environments/environment";
-import {Subject} from "rxjs/Subject";
+import {User} from '../models/user.model';
+import {Injectable} from '@angular/core';
+import {Headers, Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
+import {environment} from '../../environments/environment';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class AuthenticationService {
@@ -38,18 +38,18 @@ export class AuthenticationService {
   }
 
   // Gets a user returns an observable
-  getUserById(id : string) {
+  getUserById(id: string) {
     const getRequestHeaders = this.headers;
     getRequestHeaders.append('jwt', this.getJwt());
 
     return this.http.get(environment.apiUrl + '/users/' + id, {headers: getRequestHeaders})
       .map((response: Response) => response.json())
-      .catch((err: Response) => Observable.throw(err.json()))
+      .catch((err: Response) => Observable.throw(err.json()));
   }
 
   // Logs a user out
   logout() {
-    localStorage.clear()
+    localStorage.clear();
   }
 
   // Sets this user and emits the next subscription
@@ -60,16 +60,16 @@ export class AuthenticationService {
 
   // Returns true if logged in
   isLoggedIn() {
-    return this.getJwt() !== null && this.getUserId() !== null
+    return this.getJwt() !== null && this.getUserId() !== null;
   }
 
   // Will return this user, or if user null (a la page refresh), re-fetches user
   getUser() {
-    if (this.user === null && this.isLoggedIn())
+    if (this.user === null && this.isLoggedIn()) {
       this.getUserById(this.getUserId())
         .subscribe(
           data => {
-            let newUser = new User();
+            const newUser = new User();
             newUser.firstName = data.firstName;
             newUser.email = data.email;
             newUser.secondName = data.secondName;
@@ -77,21 +77,24 @@ export class AuthenticationService {
             this.user = newUser;
             this.userChanged.next(this.user);
           },
-          err =>  console.error('no user')
+          err => console.error('no user')
         );
-    else
-      this.userChanged.next(this.user)
+    } else {
+      this.userChanged.next(this.user);
+    }
   }
 
   // Get the current jwt token stored
   getJwt() {
-    return localStorage.getItem('jwt')
+    return localStorage.getItem('jwt');
   }
 
   // Get the current user id stored
   getUserId() {
-    return localStorage.getItem('userId')
+    return localStorage.getItem('userId');
   }
 
-  get currentUser(){ return this.user };
+  get currentUser() {
+    return this.user;
+  }
 }

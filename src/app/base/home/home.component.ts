@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {User} from "../../models/user.model";
-import {AuthenticationService} from "../../services/authentication.service";
-import {Subscription} from "rxjs/Subscription";
+import {User} from '../../models/user.model';
+import {AuthenticationService} from '../../services/authentication.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.userSub = this.authService.userChanged
       .subscribe(
         (user) => {
-          let newUser = new User();
+          const newUser = new User();
           newUser.email = user.email;
           newUser.firstName = user.firstName;
           newUser.secondName = user.secondName;

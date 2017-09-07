@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
-import {AuthenticationService} from "../../services/authentication.service";
-import {Router} from "@angular/router";
-import {NO_ERRORS_SCHEMA} from "@angular/core";
+import {AuthenticationService} from '../../services/authentication.service';
+import {Router} from '@angular/router';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -56,5 +56,5 @@ describe('HeaderComponent', () => {
     component.onLogout();
     fixture.detectChanges();
     expect(mockRouter.navigate).toHaveBeenCalled();
-  })
+  });
 });

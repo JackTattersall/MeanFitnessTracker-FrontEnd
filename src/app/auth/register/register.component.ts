@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthenticationService} from "../../services/authentication.service";
-import {User} from "../../models/user.model";
-import {ActivatedRoute, Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthenticationService} from '../../services/authentication.service';
+import {User} from '../../models/user.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,13 +20,13 @@ export class RegisterComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.initForm()
+    this.initForm();
   }
 
   onSubmit() {
 
     if (this.registerForm.valid && this.passwordsMatch()) {
-      let newUser = new User();
+      const newUser = new User();
       newUser.email = this.registerForm.get('email').value;
       newUser.firstName = this.registerForm.get('firstName').value;
       newUser.secondName = this.registerForm.get('secondName').value;
@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
       this.authService.register(newUser).subscribe(
         data => {
           this.authService.setUser(newUser);
-          this.router.navigate(['sent'], {relativeTo: this.route})
+          this.router.navigate(['sent'], {relativeTo: this.route});
         },
         err => this.registerForm.reset()
       );
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
     return (
       this.registerForm.get('passwordOne').value ===
       this.registerForm.get('passwordTwo').value
-    )
+    );
   }
 
   get firstName() { return this.registerForm.get('firstName'); }

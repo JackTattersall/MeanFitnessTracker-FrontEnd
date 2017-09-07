@@ -30,7 +30,9 @@ export class RegisterPage {
   }
 
   getSecondNameRequiredText() {
-    browser.wait(this.until.presenceOf(element(by.id('register-second-name-required'))), 5000, 'Element taking too long to appear in the DOM');
+    browser.wait(
+      this.until.presenceOf(element(by.id('register-second-name-required'))), 5000, 'Element taking too long to appear in the DOM'
+    );
     return element(by.id('register-second-name-required')).getText();
   }
 
@@ -94,14 +96,14 @@ export class RegisterPage {
   }
 
   clickRow() {
-    element(by.id('register-row')).click()
+    element(by.id('register-row')).click();
   }
 
   clickFirstName() {
-    element(by.id('register-first-name')).click()
+    element(by.id('register-first-name')).click();
   }
 
   submitButton() {
-    return element(by.id('register-submit'))
+    return element(by.id('register-submit'));
   }
 }

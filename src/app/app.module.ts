@@ -7,16 +7,16 @@ import { HeaderComponent } from './base/header/header.component';
 import {AppRoutesModule} from './routes/app-routes-module';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import {AuthenticationService} from "./services/authentication.service";
-import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpModule} from "@angular/http";
-import {HttpClientModule} from "@angular/common/http";
+import {AuthenticationService} from './services/authentication.service';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import { RegisterSuccessComponent } from './auth/register-success/register-success.component';
 import { RegisterFailureComponent } from './auth/register-failure/register-failure.component';
 import { RegisterEmailSentComponent } from './auth/register-email-sent/register-email-sent.component';
 import { VitalsComponent } from './vitals/vitals.component';
-import {AuthGuard} from "./auth/guards/auth-guard.service";
-import {TitalisePipe} from "./shared/pipes/titalise.pipe";
+import {AuthGuard} from './auth/guards/auth-guard.service';
+import {TitalisePipe} from './shared/pipes/titalise.pipe';
 
 @NgModule({
   declarations: [
