@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 /*
- * Capitalise the first letter of the string
+ * Capitalises the first letter of the string
  *
 */
 @Pipe({name: 'titalise'})
