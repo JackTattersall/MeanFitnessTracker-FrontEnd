@@ -38,13 +38,15 @@ export class RegisterComponent implements OnInit {
           this.authService.setUser(newUser);
           this.router.navigate(['sent'], {relativeTo: this.route});
         },
-        err => this.registerForm.reset()
+        err => {
+          this.registerForm.reset();
+          console.log(err);
+        }
       );
-
     }
   }
 
-  private initForm() {
+  initForm() {
     this.registerForm = this.formBuilder.group({
       firstName: [null, Validators.required],
       secondName: [null, Validators.required],
@@ -63,7 +65,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  private passwordsMatch() {
+  passwordsMatch() {
     return (
       this.registerForm.get('passwordOne').value ===
       this.registerForm.get('passwordTwo').value
