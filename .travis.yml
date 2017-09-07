@@ -3,7 +3,8 @@ node_js:
   - "node"
 
 notifications:
-    slack: angrybeaversteam:7Udv7IhMMAkQrgaw5VjEclEX
+    slack: "Nva1VaJjUlwXjjFrhL32kkfFc/0MZWYlq3HIwi/PjPKvG4j7xjxtxo94cuWt0kjtZd68jPBRy8tpzejeMSiplIhTVnZNNCtuhuW0MS+idqBEgKe/kJ2HaD1rRmEczgg2FpPbalIZQ2eut8ezlB6eByt/h/H+R/xMtIO8cWOX4yO0+LhaxGh75JzW7jfF2S4wX89bib3t0TXLFVhXx54h7xQzR+8O/y4F8SYiJBdkdpyhsfUAonPZkFp1S6YcIHT5xYMjs1tOkLsH0HdUpSf+9srXvRgAxZ4bhBWpXVtg9b5HW/tqCPs+iqPJN+RzudJHcpyr0wYN6J0wkCQxK4jfrdddRPa5Xegk65lH+EbfflshbhXwzf9pzgdlYZ0AQCMJQvBfL+XGlFRHj8K3xkwDjSo7PirGzeWRXJeGFf8EZnX9ILYKl08QNwVE4ALHfVXGPz+taDYcoJKaD2VZCVeaY/uPvlWDh8DxXXaJwDv3B/qqK/594WpMn/nuwH5CKheTJMGCvj4wHlBU1REZ+Dte6yxLIbffEEL95Xj/3h2jBMtJqOyDGSGX7Ht0iq0NpDi+nuoOV78XFgKe85CLb5v5lWD/NvKHYbN82XbVIcERMD+GD7kf4vdhaJ7OQ68MxmBW/itkwl+X7QT5CMJo74bzgHkqFomZOxnZpzRwk+XZik0="
+
 
 before_install:
  - export CHROME_BIN=/usr/bin/google-chrome
