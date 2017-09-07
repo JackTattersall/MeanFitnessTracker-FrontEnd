@@ -21,5 +21,5 @@ describe('Titalise without a test bed', () => {
   it('should return empty string if empty string passed in', () => {
     const result = titalise.transform('');
     expect(result).toEqual('');
-  })
+  });
 });
