@@ -200,6 +200,44 @@ describe('AuthenticationService with test bed', () => {
         expect(jwtSpy).toHaveBeenCalled();
         expect(loggedInSpy).toHaveBeenCalled();
       }));
+
+    it('should emit user if isLoggedIn true and user not null',
+      inject([AuthenticationService, XHRBackend], (authService, mockBackend) => {
+
+        const isLoggedInSpy: Spy = spyOn(authService, 'isLoggedIn').and.returnValue(true);
+
+        const testUser: User = new User();
+        testUser.firstName = 'test';
+        testUser.secondName = 'tester';
+        testUser.email = 'test@tester';
+
+        authService.user = testUser;
+
+        // Setup a temp user and subscribe to userChanged to see if it gets updated
+        let tempUser: User;
+        authService.userChanged.subscribe((user: User) => {
+          tempUser = user;
+        });
+
+        authService.getUser();
+
+        expect(isLoggedInSpy).toHaveBeenCalled();
+        expect(tempUser).toEqual(testUser);
+
+    }));
+
+    it('should console log "Not logged in" if isLoggedIn false',
+      inject([AuthenticationService, XHRBackend], (authService, mockBackend) => {
+
+        const isLoggedInSpy: Spy = spyOn(authService, 'isLoggedIn').and.returnValue(false);
+        const consoleLogSpy: Spy = spyOn(console, 'log');
+        authService.user = null;
+
+        authService.getUser();
+        expect(isLoggedInSpy).toHaveBeenCalled();
+        expect(consoleLogSpy).toHaveBeenCalledWith('Not logged in');
+
+      }));
   });
 
   describe('register /POST', () => {
