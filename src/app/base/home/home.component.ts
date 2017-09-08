@@ -36,8 +36,5 @@ export class HomeComponent implements OnInit, OnDestroy {
     // Manually un-subscribe
     this.userSub.unsubscribe();
   }
-
-  // todo make frontend and backend variable names match, thisVar instead of this_var
-  // todo remove User fields from constructor so we don't have to keep providing dummy Password
 }
 

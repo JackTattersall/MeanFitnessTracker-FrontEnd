@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit {
         data => {
           this.authService.setUser(newUser);
           this.router.navigate(['sent'], {relativeTo: this.route});
+          console.log(data);
         },
         err => {
           this.registerForm.reset();

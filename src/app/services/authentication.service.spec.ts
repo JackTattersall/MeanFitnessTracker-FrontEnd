@@ -1,9 +1,10 @@
 import {AuthenticationService} from './authentication.service';
-import {Http, RequestOptions} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
+import {Http, HttpModule, RequestOptions, ResponseOptions, XHRBackend, Response} from '@angular/http';
+import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../models/user.model';
 import Spy = jasmine.Spy;
+import {inject, TestBed} from '@angular/core/testing';
 
 describe('AuthenticationService without the TestBed', () => {
   let service: AuthenticationService;
@@ -102,5 +103,126 @@ describe('AuthenticationService without the TestBed', () => {
 
     expect(service.isLoggedIn()).toBeTruthy();
   });
+});
 
+describe('AuthenticationService with test bed', () => {
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpModule],
+      providers: [
+        AuthenticationService,
+        {provide: XHRBackend, useClass: MockBackend}
+      ]
+    });
+  });
+
+  describe('userById /GET', () => {
+
+    // So.. we inject the authService and mockBackend set up in the test bed into this test
+
+    it('should return an observable containing user data',
+      inject([AuthenticationService, XHRBackend], (authService, mockBackend) => {
+
+        // Create mock data
+        const mockResponse = {
+          email: 'test@tester',
+          firstName: 'test',
+          secondName: 'tester'
+        };
+
+        const spy = spyOn(authService, 'getJwt').and.returnValue('12345');
+
+        // Set the mock backend to respond with the mock data
+        mockBackend.connections.subscribe((connection: MockConnection) => {
+          connection.mockRespond(new Response(new ResponseOptions({
+            body: JSON.stringify(mockResponse)
+          })));
+        });
+
+        authService.getUserById('123').subscribe((user) => {
+          expect(spy).toHaveBeenCalled();
+          expect(user.firstName).toEqual('test');
+          expect(user.secondName).toEqual('tester');
+          expect(user.email).toEqual('test@tester');
+        });
+
+      }));
+  });
+
+  describe('getUser', () => {
+
+    it(`if user is null, and isLoggedIn is true
+       then getUserById should be called and if successful
+        then user should be set
+         and userChanged should receive user as next`,
+      inject([AuthenticationService, XHRBackend], (authService, mockBackend) => {
+
+        // Set user to null and isLoggedIn() returns true
+        authService.user = null;
+        const loggedInSpy: Spy = spyOn(authService, 'isLoggedIn').and.returnValue(true);
+
+        // Create a spy for getJwt that returns 123, as is needed by getUserById
+        const jwtSpy = spyOn(authService, 'getJwt').and.returnValue('123');
+
+        // Create response user data
+        const userData = {
+          email: 'test@tester',
+          firstName: 'test',
+          secondName: 'tester'
+        };
+
+        // Set getUserByID to respond with the user data
+        mockBackend.connections.subscribe((connection: MockConnection) => {
+          connection.mockRespond(new Response(new ResponseOptions({
+            body: JSON.stringify(userData)
+          })));
+        });
+
+        // Setup a temp user and subscribe to userChanged to see if it gets updated
+        let tempUser: User;
+        authService.userChanged.subscribe((user: User) => {
+          tempUser = user;
+        });
+
+        // Expected user to be set
+        const expectedUser: User = new User();
+        expectedUser.firstName = 'test';
+        expectedUser.secondName = 'tester';
+        expectedUser.email = 'test@tester';
+
+        // Act
+        authService.getUser();
+
+        // Assert
+        expect(authService.user).toEqual(expectedUser);
+        expect(tempUser).toEqual(expectedUser);
+        expect(jwtSpy).toHaveBeenCalled();
+        expect(loggedInSpy).toHaveBeenCalled();
+      }));
+  });
+
+  describe('register /POST', () => {
+    it('should return an observable with posted data',
+      inject([AuthenticationService, XHRBackend], (authService, mockBackend) => {
+
+        const postedData =  {
+          email: 'test@tester',
+          password: 'tester'
+        };
+
+        // Set posted data to be returned
+        mockBackend.connections.subscribe((connection: MockConnection) => {
+          connection.mockRespond(new Response(new ResponseOptions({
+            body: JSON.stringify(postedData)
+          })));
+        });
+
+        // Subscribe to register verifying it returns an Observable, and checking the data is correct
+        authService.register().subscribe((responseData) => {
+          expect(responseData.email).toEqual('test@tester');
+          expect(responseData.password).toEqual('tester');
+        });
+      }));
+  });
 });

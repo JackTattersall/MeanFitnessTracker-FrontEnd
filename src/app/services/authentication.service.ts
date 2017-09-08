@@ -43,7 +43,7 @@ export class AuthenticationService {
     getRequestHeaders.append('jwt', this.getJwt());
 
     return this.http.get(environment.apiUrl + '/users/' + id, {headers: getRequestHeaders})
-      .map((response: Response) => response.json())
+      .map((response: Response) =>  response.json())
       .catch((err: Response) => Observable.throw(err.json()));
   }
 
@@ -65,22 +65,30 @@ export class AuthenticationService {
 
   // Will return this user, or if user null (a la page refresh), re-fetches user
   getUser() {
-    if (this.user === null && this.isLoggedIn()) {
-      this.getUserById(this.getUserId())
-        .subscribe(
-          data => {
-            const newUser = new User();
-            newUser.firstName = data.firstName;
-            newUser.email = data.email;
-            newUser.secondName = data.secondName;
+    if (this.isLoggedIn()) {
 
-            this.user = newUser;
-            this.userChanged.next(this.user);
-          },
-          err => console.error('no user')
-        );
+      if (this.user === null) {
+
+        this.getUserById(this.getUserId())
+          .subscribe(
+            data => {
+              const newUser = new User();
+              newUser.firstName = data.firstName;
+              newUser.email = data.email;
+              newUser.secondName = data.secondName;
+
+              this.user = newUser;
+              this.userChanged.next(this.user);
+            },
+            err => console.error('no user')
+          );
+
+      } else {
+        this.userChanged.next(this.user);
+      }
+
     } else {
-      this.userChanged.next(this.user);
+      console.log('Not logged in');
     }
   }
 
