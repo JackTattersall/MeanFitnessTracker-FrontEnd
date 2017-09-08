@@ -1,5 +1,5 @@
 import {AuthenticationService} from './authentication.service';
-import {Http, HttpModule, RequestOptions, ResponseOptions, XHRBackend, Response} from '@angular/http';
+import {Http, HttpModule, RequestOptions, ResponseOptions, XHRBackend, Response, ResponseType} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../models/user.model';
@@ -261,6 +261,72 @@ describe('AuthenticationService with test bed', () => {
           expect(responseData.email).toEqual('test@tester');
           expect(responseData.password).toEqual('tester');
         });
+      }));
+
+    it('should throw an an observable error if request returns error',
+      inject([AuthenticationService, XHRBackend], (authService, mockBackend) => {
+
+        class MockError extends Response implements Error {
+          name: any;
+          message: any;
+        }
+
+        const body = JSON.stringify({ message: 'Registration Failed' });
+
+        // Set post to return error
+        mockBackend.connections.subscribe((connection: MockConnection) => {
+          connection.mockError(new MockError(new ResponseOptions({type: ResponseType.Error, status: 404, body: body})));
+        });
+
+        authService.register().subscribe(
+          data => expect(false).toBeTruthy(),
+          err => expect(err.message).toBe('Registration Failed')
+        );
+    }));
+  });
+
+  describe('signIn /POST', () => {
+    it('should return an observable with posted data',
+      inject([AuthenticationService, XHRBackend], (authService, mockBackend) => {
+
+        const postedData =  {
+          email: 'test@tester',
+          password: 'tester'
+        };
+
+        // Set posted data to be returned
+        mockBackend.connections.subscribe((connection: MockConnection) => {
+          connection.mockRespond(new Response(new ResponseOptions({
+            body: JSON.stringify(postedData)
+          })));
+        });
+
+        // Subscribe to register verifying it returns an Observable, and checking the data is correct
+        authService.signIn().subscribe((responseData) => {
+          expect(responseData.email).toEqual('test@tester');
+          expect(responseData.password).toEqual('tester');
+        });
+      }));
+
+    it('should throw an an observable error if request returns error',
+      inject([AuthenticationService, XHRBackend], (authService, mockBackend) => {
+
+        class MockError extends Response implements Error {
+          name: any;
+          message: any;
+        }
+
+        const body = JSON.stringify({message: 'Registration Failed'});
+
+        // Set post to return error
+        mockBackend.connections.subscribe((connection: MockConnection) => {
+          connection.mockError(new MockError(new ResponseOptions({type: ResponseType.Error, status: 404, body: body})));
+        });
+
+        authService.signIn().subscribe(
+          data => expect(false).toBeTruthy(),
+          err => expect(err.message).toBe('Registration Failed')
+        );
       }));
   });
 });
