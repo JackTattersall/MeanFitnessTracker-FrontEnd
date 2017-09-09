@@ -50,6 +50,6 @@ describe('fitness-tracker Login', () => {
 
   it('valid user should be logged in', () => {
     page.navigateTo();
-    page.setEmailText('bill@bailey.com')
+    page.setEmailText('bill@bailey.com');
   });
 });
