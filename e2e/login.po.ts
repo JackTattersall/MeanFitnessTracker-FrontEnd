@@ -17,12 +17,12 @@ export class LoginPage {
   }
 
   getEmailRequiredText() {
-    browser.wait(this.until.presenceOf(element(by.id('login-email-required'))), 5000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('login-email-required'))), 1000, 'Element taking too long to appear in the DOM');
     return element(by.id('login-email-required')).getText();
   }
 
   getEmailValidText() {
-    browser.wait(this.until.presenceOf(element(by.id('login-email-valid'))), 5000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('login-email-valid'))), 1000, 'Element taking too long to appear in the DOM');
     return element(by.id('login-email-valid')).getText();
   }
 
@@ -35,7 +35,7 @@ export class LoginPage {
   }
 
   getPasswordRequiredText() {
-    browser.wait(this.until.presenceOf(element(by.id('login-password-required'))), 5000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('login-password-required'))), 1000, 'Element taking too long to appear in the DOM');
     return element(by.id('login-password-required')).getText();
   }
 
