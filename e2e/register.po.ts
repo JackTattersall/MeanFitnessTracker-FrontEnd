@@ -17,7 +17,7 @@ export class RegisterPage {
   }
 
   getFirstNameRequiredText() {
-    browser.wait(this.until.presenceOf(element(by.id('register-name-required'))), 1000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('register-name-required'))), 5000, 'Element taking too long to appear in the DOM');
     return element(by.id('register-name-required')).getText();
   }
 
@@ -31,7 +31,7 @@ export class RegisterPage {
 
   getSecondNameRequiredText() {
     browser.wait(
-      this.until.presenceOf(element(by.id('register-second-name-required'))), 1000, 'Element taking too long to appear in the DOM'
+      this.until.presenceOf(element(by.id('register-second-name-required'))), 5000, 'Element taking too long to appear in the DOM'
     );
     return element(by.id('register-second-name-required')).getText();
   }
@@ -45,12 +45,12 @@ export class RegisterPage {
   }
 
   getEmailRequiredText() {
-    browser.wait(this.until.presenceOf(element(by.id('register-email-required'))), 1000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('register-email-required'))), 5000, 'Element taking too long to appear in the DOM');
     return element(by.id('register-email-required')).getText();
   }
 
   getEmailValidText() {
-    browser.wait(this.until.presenceOf(element(by.id('register-email-valid'))), 1000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('register-email-valid'))), 5000, 'Element taking too long to appear in the DOM');
     return element(by.id('register-email-valid')).getText();
   }
 
@@ -63,12 +63,12 @@ export class RegisterPage {
   }
 
   getPasswordRequiredText() {
-    browser.wait(this.until.presenceOf(element(by.id('register-password-required'))), 1000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('register-password-required'))), 5000, 'Element taking too long to appear in the DOM');
     return element(by.id('register-password-required')).getText();
   }
 
   getPasswordValidText() {
-    browser.wait(this.until.presenceOf(element(by.id('register-password-valid'))), 1000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('register-password-valid'))), 5000, 'Element taking too long to appear in the DOM');
     return element(by.id('register-password-valid')).getText();
   }
 
@@ -81,22 +81,22 @@ export class RegisterPage {
   }
 
   getPasswordTwoRequiredText() {
-    browser.wait(this.until.presenceOf(element(by.id('register-pass-two-required'))), 1000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('register-pass-two-required'))), 5000, 'Element taking too long to appear in the DOM');
     return element(by.id('register-pass-two-required')).getText();
   }
 
   getPasswordTwoValidText() {
-    browser.wait(this.until.presenceOf(element(by.id('register-pass-two-valid'))), 1000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('register-pass-two-valid'))), 5000, 'Element taking too long to appear in the DOM');
     return element(by.id('register-pass-two-valid')).getText();
   }
 
   getPasswordsMatchText() {
-    browser.wait(this.until.presenceOf(element(by.id('register-passwords-match'))), 1000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('register-passwords-match'))), 5000, 'Element taking too long to appear in the DOM');
     return element(by.id('register-passwords-match')).getText();
   }
 
   getEmailAlreadyExistsText() {
-    browser.wait(this.until.presenceOf(element(by.id('register-email-exists'))), 1000, 'Element taking too long to appear in the DOM');
+    browser.wait(this.until.presenceOf(element(by.id('register-email-exists'))), 5000, 'Element taking too long to appear in the DOM');
     return element(by.id('register-email-exists')).getText();
   }
 
