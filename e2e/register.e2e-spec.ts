@@ -114,4 +114,17 @@ describe('fitness-tracker Register', () => {
     page.setPasswordTwoText('123456');
     expect(page.submitButton().isEnabled()).toBe(true);
   });
+
+  it('should clear email and display, account with this email already exists, if email already exists', () => {
+    page.navigateTo();
+    page.setFirstNameText('bill');
+    page.setSecondNameText('bailey');
+    page.setemailText('bill@bailey.com');
+    page.setPasswordText('123456');
+    page.setPasswordTwoText('123456');
+
+    page.submitButton().click();
+
+    expect(page.getEmailAlreadyExistsText()).toBe('An account with this email already exists');
+  });
 });

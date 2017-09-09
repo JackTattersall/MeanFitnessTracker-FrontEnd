@@ -95,6 +95,11 @@ export class RegisterPage {
     return element(by.id('register-passwords-match')).getText();
   }
 
+  getEmailAlreadyExistsText() {
+    browser.wait(this.until.presenceOf(element(by.id('register-email-exists'))), 5000, 'Element taking too long to appear in the DOM');
+    return element(by.id('register-email-exists')).getText();
+  }
+
   clickRow() {
     element(by.id('register-row')).click();
   }
