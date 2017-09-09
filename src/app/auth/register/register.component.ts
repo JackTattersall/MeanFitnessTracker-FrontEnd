@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  emailUnique = true;
 
   constructor(
     private authService: AuthenticationService,
@@ -37,11 +38,13 @@ export class RegisterComponent implements OnInit {
         data => {
           this.authService.setUser(newUser);
           this.router.navigate(['sent'], {relativeTo: this.route});
-          console.log(data);
         },
         err => {
-          this.registerForm.reset();
-          console.log(err);
+          if (err.message === 'Account with this email already exists') {
+            this.emailNotUnique();
+          } else {
+            this.registerForm.reset();
+          }
         }
       );
     }
@@ -82,5 +85,10 @@ export class RegisterComponent implements OnInit {
   get passwordOne() { return this.registerForm.get('passwordOne'); }
 
   get passwordTwo() { return this.registerForm.get('passwordTwo'); }
+
+  emailNotUnique() {
+    this.email.setValue('');
+    this.emailUnique = false;
+  }
 
 }

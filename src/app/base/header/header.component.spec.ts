@@ -55,6 +55,12 @@ describe('HeaderComponent', () => {
   it('router navigate should be called on logout', () => {
     component.onLogout();
     fixture.detectChanges();
-    expect(mockRouter.navigate).toHaveBeenCalled();
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['login']);
+  });
+
+  it('onMyAccount should call navigate', () => {
+    component.onMyAccount();
+    fixture.detectChanges();
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['account']);
   });
 });

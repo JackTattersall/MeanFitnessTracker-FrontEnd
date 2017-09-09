@@ -17,6 +17,7 @@ import { RegisterEmailSentComponent } from './auth/register-email-sent/register-
 import { VitalsComponent } from './vitals/vitals.component';
 import {AuthGuard} from './auth/guards/auth-guard.service';
 import {TitalisePipe} from './shared/pipes/titalise.pipe';
+import { AccountDetailsComponent } from './auth/account-details/account-details.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {TitalisePipe} from './shared/pipes/titalise.pipe';
     RegisterFailureComponent,
     RegisterEmailSentComponent,
     VitalsComponent,
-    TitalisePipe
+    TitalisePipe,
+    AccountDetailsComponent
   ],
   imports: [
     BrowserModule,

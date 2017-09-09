@@ -17,6 +17,7 @@
           <li><a routerLink="/register">Register</a></li>
         </ng-template>
         <ng-template [ngIf]="isLoggedIn()">
+          <li style="cursor: pointer"><a (click)="onMyAccount()">My Account</a></li>
           <li style="cursor: pointer"><a (click)="onLogout()">Logout</a></li>
         </ng-template>
       </ul>

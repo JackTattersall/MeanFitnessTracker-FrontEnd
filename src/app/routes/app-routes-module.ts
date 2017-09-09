@@ -8,6 +8,7 @@ import {RegisterFailureComponent} from '../auth/register-failure/register-failur
 import {RegisterEmailSentComponent} from '../auth/register-email-sent/register-email-sent.component';
 import {VitalsComponent} from '../vitals/vitals.component';
 import {AuthGuard} from '../auth/guards/auth-guard.service';
+import {AccountDetailsComponent} from '../auth/account-details/account-details.component';
 
 const routes: Routes = [
   // Auth routes
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'register/success', component: RegisterSuccessComponent },
   { path: 'register/failure', component: RegisterFailureComponent },
   { path: 'register/sent', component: RegisterEmailSentComponent },
+  { path: 'account', component: AccountDetailsComponent },
   { path: 'vitals', component: VitalsComponent, canActivate: [AuthGuard] }
 ];
 

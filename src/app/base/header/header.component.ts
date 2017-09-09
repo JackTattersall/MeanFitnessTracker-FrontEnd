@@ -24,4 +24,8 @@ export class HeaderComponent implements OnInit {
   isLoggedIn() {
     return this.authService.isLoggedIn();
   }
+
+  onMyAccount() {
+    this.router.navigate(['account']);
+  }
 }

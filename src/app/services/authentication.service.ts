@@ -25,7 +25,8 @@ export class AuthenticationService {
 
     return this.http.post(environment.apiUrl + '/users', body, {headers: this.headers})
       .map((response: Response) => response.json())
-      .catch((err: Response) => Observable.throw(err.json()));
+      .catch((err: Response) => Observable.throw(err.json())
+      );
   }
 
   // Signs in a user returns an observable
