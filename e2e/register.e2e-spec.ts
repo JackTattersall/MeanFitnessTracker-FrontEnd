@@ -115,7 +115,7 @@ describe('fitness-tracker Register', () => {
     expect(page.submitButton().isEnabled()).toBe(true);
   });
 
-  it('should clear email and display, account with this email already exists, if email already exists', () => {
+  it('should clear e-mail and display, account with this email already exists, if email already exists', () => {
     page.navigateTo();
     page.setFirstNameText('bill');
     page.setSecondNameText('bailey');
