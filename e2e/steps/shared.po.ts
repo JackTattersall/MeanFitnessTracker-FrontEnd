@@ -1,5 +1,4 @@
 import {browser, by, element, ExpectedConditions} from 'protractor';
-import {environment} from '../../src/environments/environment';
 
 export class SharedSteps {
 
