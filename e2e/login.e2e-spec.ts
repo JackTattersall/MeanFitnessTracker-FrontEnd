@@ -47,4 +47,9 @@ describe('fitness-tracker Login', () => {
     page.setPasswordText('123456');
     expect(page.submitButton().isEnabled()).toBe(true);
   });
+
+  it('valid user should be logged in', () => {
+    page.navigateTo();
+    page.setEmailText('bill@bailey.com')
+  });
 });
