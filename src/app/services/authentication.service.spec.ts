@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {User} from '../models/user.model';
 import Spy = jasmine.Spy;
 import {inject, TestBed} from '@angular/core/testing';
+import {environment} from '../../environments/environment';
 
 describe('AuthenticationService without the TestBed', () => {
   let service: AuthenticationService;
@@ -33,7 +34,7 @@ describe('AuthenticationService without the TestBed', () => {
     user.firstName = 'lo';
     service.register(user);
     expect(postSpy).toHaveBeenCalled();
-    expect(postSpy).toHaveBeenCalledWith('http://localhost:8080/users', '{"firstName":"lo"}', jasmine.any(Object));
+    expect(postSpy).toHaveBeenCalledWith(environment.apiUrl + '/users', '{"firstName":"lo"}', jasmine.any(Object));
   });
 
   it('signIn should send post request', () => {
@@ -41,13 +42,13 @@ describe('AuthenticationService without the TestBed', () => {
     user.firstName = 'lo';
     service.signIn(user);
     expect(postSpy).toHaveBeenCalled();
-    expect(postSpy).toHaveBeenCalledWith('http://localhost:8080/users/signin', '{"firstName":"lo"}', jasmine.any(Object));
+    expect(postSpy).toHaveBeenCalledWith(environment.apiUrl + '/users/signin', '{"firstName":"lo"}', jasmine.any(Object));
   });
 
   it('getUserByID should send get request', () => {
     service.getUserById('12west');
     expect(getSpy).toHaveBeenCalled();
-    expect(getSpy).toHaveBeenCalledWith('http://localhost:8080/users/12west', jasmine.any(Object));
+    expect(getSpy).toHaveBeenCalledWith(environment.apiUrl + '/users/12west', jasmine.any(Object));
   });
 
   it('setUser should initialize user and also emit next fro userChanged', () => {
