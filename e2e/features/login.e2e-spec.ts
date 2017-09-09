@@ -1,10 +1,13 @@
-import {LoginPage} from './login.po';
+import {LoginPage} from '../steps/login.po';
+import {SharedSteps} from '../steps/shared.po';
 
 describe('fitness-tracker Login', () => {
   let page: LoginPage;
+  let shared: SharedSteps;
 
   beforeEach(() => {
     page = new LoginPage();
+    shared = new SharedSteps();
   });
 
   it('should accept email', () => {
@@ -51,5 +54,9 @@ describe('fitness-tracker Login', () => {
   it('valid user should be logged in', () => {
     page.navigateTo();
     page.setEmailText('bill@bailey.com');
+    page.setPasswordText('qwerty123');
+    page.submitButton().click();
+
+    expect(shared.isLoginPage()).toContain('Welcome to Your Fitness Tracker');
   });
 });

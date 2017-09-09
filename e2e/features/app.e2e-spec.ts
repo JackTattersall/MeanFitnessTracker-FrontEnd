@@ -1,4 +1,4 @@
-import { FitnessTrackerPage } from './app.po';
+import { FitnessTrackerPage } from '../steps/app.po';
 
 describe('fitness-tracker App', () => {
   let page: FitnessTrackerPage;

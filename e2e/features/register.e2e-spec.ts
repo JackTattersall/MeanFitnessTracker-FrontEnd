@@ -1,4 +1,4 @@
-import { RegisterPage } from './register.po';
+import { RegisterPage } from '../steps/register.po';
 
 describe('fitness-tracker Register', () => {
   let page: RegisterPage;
