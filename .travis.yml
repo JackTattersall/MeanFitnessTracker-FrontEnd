@@ -17,7 +17,6 @@ before_script:
 - npm install coveralls
 - npm install
 - yes | cp ./src/environments/environment.prod.ts ./src/environments/environment.ts
-- cat ./src/environments/environment.ts
 - ng lint
 - ng build --aot --prod
 - ng serve --environment=prod & ng e2e

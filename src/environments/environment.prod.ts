@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://34.240.80.93:8080'
+  apiUrl: 'https://fitness-tracker-back-end.herokuapp.com/'
 };
