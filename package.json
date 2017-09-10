@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "heroku-prebuild": "npm install -g http-server",
-    "heroku-postbuild": "'cp' ./src/environments/environment.prod.ts ./src/environments/environment.ts && cat ./src/environments/environment.ts && pwd && ng build --prod"
+    "heroku-postbuild": "'cp' ./src/environments/environment.prod.ts ./src/environments/environment.ts && ng build --prod"
   },
   "private": true,
   "dependencies": {
