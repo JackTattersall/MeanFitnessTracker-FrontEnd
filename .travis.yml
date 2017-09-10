@@ -21,7 +21,7 @@ before_script:
 - ng lint
 - ng build --aot --prod
 - webdriver-manager update
-- ng serve & ng e2e
+- chromedriver --port 4200 --verbose --log-path=chromedriver.log & ng e2e
 - ng test --watch=false --code-coverage
 script:
 - codecov
