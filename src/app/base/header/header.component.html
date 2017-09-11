@@ -18,7 +18,7 @@
         </ng-template>
         <ng-template [ngIf]="isLoggedIn()">
           <li style="cursor: pointer"><a (click)="onMyAccount()">My Account</a></li>
-          <li style="cursor: pointer"><a (click)="onLogout()">Logout</a></li>
+          <li style="cursor: pointer"><a id="logout-button" (click)="onLogout()">Logout</a></li>
         </ng-template>
       </ul>
     </div>

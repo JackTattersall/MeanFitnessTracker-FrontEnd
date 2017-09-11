@@ -2,11 +2,21 @@ import {browser, by, element, ExpectedConditions} from 'protractor';
 
 export class SharedSteps {
 
-  isLoginPage() {
+  until = ExpectedConditions;
+
+  isHomePage() {
     const el = element(by.tagName('h3'));
     return el.getText();
   }
 
-  // const EC = protractor.ExpectedConditions;
+  logout() {
+    return element(by.id('logout-button'));
+  }
+
+  isLoginPage() {
+    return browser.wait(this.until.urlContains('login'), 5000);
+  }
+
+
   // browser.wait(EC.urlContains('my-url'), 5000);
 }

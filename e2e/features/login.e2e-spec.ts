@@ -57,6 +57,19 @@ describe('fitness-tracker Login', () => {
     page.setPasswordText('qwerty123');
     page.submitButton().click();
 
-    expect(shared.isLoginPage()).toContain('Welcome to Your Fitness Tracker');
+    expect(shared.isHomePage()).toContain('Welcome to Your Fitness Tracker');
+  });
+
+  it('logout should redirect to login page', () => {
+    page.navigateTo();
+    page.setEmailText('bill@bailey.com');
+    page.setPasswordText('qwerty123');
+    page.submitButton().click();
+
+    expect(shared.isHomePage()).toContain('Welcome to Your Fitness Tracker');
+
+    shared.logout().click();
+
+    expect(shared.isLoginPage()).toBeTruthy();
   });
 });
