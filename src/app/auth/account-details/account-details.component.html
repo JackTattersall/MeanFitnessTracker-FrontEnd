@@ -1,3 +1,43 @@
-<p>
-  account-details works!
-</p>
+<div class="row">
+  <div class="col-xs-6">
+    <form>
+
+      <div class="form-group">
+        <label for="account-email" class="control-label">Email</label>
+        <div [class]="!passwordEditMode ? 'input-group' : ''">
+          <input type="email" id="account-email" class="form-control" autocomplete="off" value={{emailValue}} [readonly]="!emailEditMode">
+          <span *ngIf="!emailEditMode && !passwordEditMode" class="input-group-btn">
+            <button id="account-email-button" class="btn" type="button" (click)="onEditEmail()">Edit</button>
+          </span>
+          <span *ngIf="emailEditMode" class="input-group-btn">
+            <button id="account-email-edit-yes" class="btn" (click)="onEmailYes()">✓</button>
+            <button id="account-email-edit-no" class="btn" (click)="onEmailNo()">✖</button>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="account-password" class="control-label">Password</label>
+        <div [class]="!emailEditMode ? 'input-group' : ''">
+          <input type="password" id="account-password" class="form-control" value={{passwordValue}} [readonly]="!passwordEditMode">
+          <span *ngIf="!passwordEditMode && !emailEditMode" class="input-group-btn">
+            <button id="account-password-button" class="btn btn-default" type="button" (click)="onEditPassword()">Edit</button>
+          </span>
+          <span *ngIf="passwordEditMode" class="input-group-btn">
+            <button id="account-password-edit-yes" class="btn" (click)="onPasswordYes()">✓</button>
+            <button id="account-password-edit-no" class="btn" (click)="onPasswordNo()">✖</button>
+          </span>
+        </div>
+      </div>
+
+      <div *ngIf="passwordEditMode" class="form-group">
+        <label for="account-password-2" class="control-label">Re-Type Password</label>
+        <input type="password" id="account-password-2" class="form-control">
+      </div>
+
+    </form>
+  </div>
+  <div class="col-xs-6">
+    <h2>Avatar placeholder v3</h2>
+  </div>
+</div>
