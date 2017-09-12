@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs/Subscription';
 import {AuthenticationService} from '../../services/authentication.service';
@@ -9,7 +9,7 @@ import {User} from '../../models/user.model';
   templateUrl: './account-details.component.html',
   styleUrls: ['./account-details.component.css']
 })
-export class AccountDetailsComponent implements OnInit {
+export class AccountDetailsComponent implements OnInit, OnDestroy {
 
   editForm: FormGroup;
 
@@ -19,8 +19,7 @@ export class AccountDetailsComponent implements OnInit {
   user: User;
   userSub: Subscription;
 
-  emailValue = 'jack@tatts';
-  passwordValue = '*******';
+  emailValue: string;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthenticationService) { }
 
@@ -36,6 +35,10 @@ export class AccountDetailsComponent implements OnInit {
     this.authService.getUser();
 
     this.initForm();
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 
   initForm() {
@@ -56,39 +59,40 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   onSubmit() {
-    // test code
-    this.emailValue = this.editForm.get('email').value;
-    this.user.email = this.editForm.get('email').value;
-    console.log(this.editForm.get('email').value);
-    console.log(this.editForm.get('password').value);
-    console.log(this.editForm.get('passwordTwo').value);
+    // todo add 'loading = true' here and then make it false in the callback, and add loading animation to html
+    // todo also add 'if loggedIn()' here and redirect to login page if not
+
+    const newUser = new User();
+    newUser.email = this.editForm.get('email').value;
+    newUser.password = this.editForm.get('password').value;
+
+    this.authService.register(this.user)
+      .subscribe(
+        user => {
+          this.authService.setUser(user);
+        },
+        err => {
+          // maybe display a message
+        }
+      );
   }
 
   onEditEmail() {
     this.emailEditMode = !this.emailEditMode;
-    this.emailValue = '';
   }
 
   onEditPassword() {
     this.passwordEditMode = !this.passwordEditMode;
-    this.passwordValue = '';
   }
 
   // Tick and cross helper functions
 
   onEmailNo() {
     this.emailEditMode = !this.emailEditMode;
-    this.email.reset();
-    this.emailValue = this.user.email;
-    this.emailValue = this.user.email;
   }
 
   onPasswordNo() {
     this.passwordEditMode = !this.passwordEditMode;
-    this.password.reset();
-    this.passwordTwo.reset();
-    this.password.setValue(this.passwordValue);
-    this.passwordValue = '*******';
   }
 
   onEmailYes() {
@@ -99,8 +103,6 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   onPasswordYes() {
-    this.passwordValue = '*******';
-
     if (this.password.valid && this.passwordsMatch()) {
       this.onSubmit();
       this.passwordEditMode = !this.passwordEditMode;

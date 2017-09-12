@@ -48,6 +48,15 @@ export class AuthenticationService {
       .catch((err: Response) => Observable.throw(err.json()));
   }
 
+  // Updates a users details
+  updateUser(user: User) {
+    const body = JSON.stringify(user);
+
+    return this.http.put(environment.apiUrl + '/users', body, {headers: this.headers})
+      .map((response: Response) => response.json())
+      .catch((err: Response) => Observable.throw(err.json()));
+  }
+
   // Logs a user out
   logout() {
     localStorage.clear();

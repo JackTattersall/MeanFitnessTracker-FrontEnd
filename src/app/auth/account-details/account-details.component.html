@@ -10,7 +10,7 @@
             id="account-email"
             class="form-control"
             autocomplete="off"
-            value={{emailValue}}
+            [value]="emailEditMode ? '' : emailValue"
             [readonly]="!emailEditMode"
             formControlName="email"
           >
@@ -35,7 +35,7 @@
             type="password"
             id="account-password"
             class="form-control"
-            value={{passwordValue}}
+            [value]="passwordEditMode ? '' : '*******'"
             [readonly]="!passwordEditMode"
             formControlName="password"
           >
@@ -55,7 +55,7 @@
 
       <div *ngIf="passwordEditMode" class="form-group">
         <label for="account-password-2" class="control-label">Re-Type Password</label>
-        <input type="password" id="account-password-2" class="form-control" formControlName="passwordTwo">
+        <input type="password" id="account-password-2" class="form-control" [value]="passwordEditMode ? '' : ''" formControlName="passwordTwo">
         <div *ngIf="passwordTwo.invalid && (passwordTwo.touched || password.touched)">
           <div id="password-two-email-required" *ngIf="!passwordsMatch()" class="validation-text">Passwords must match</div>
         </div>
@@ -64,6 +64,6 @@
     </form>
   </div>
   <div class="col-xs-6">
-    <h2>Avatar placeholder v3</h2>
+    <h2>Avatar placeholder v3 {{emailEditMode}}</h2>
   </div>
 </div>

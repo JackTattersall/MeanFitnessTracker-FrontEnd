@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'register/success', component: RegisterSuccessComponent },
   { path: 'register/failure', component: RegisterFailureComponent },
   { path: 'register/sent', component: RegisterEmailSentComponent },
-  { path: 'account', component: AccountDetailsComponent },
+  { path: 'account', component: AccountDetailsComponent, canActivate: [AuthGuard] },
   { path: 'vitals', component: VitalsComponent, canActivate: [AuthGuard] }
 ];
 
