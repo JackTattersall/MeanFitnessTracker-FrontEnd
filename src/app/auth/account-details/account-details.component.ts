@@ -10,6 +10,8 @@ import {User} from '../../models/user.model';
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit, OnDestroy {
+  // todo figure out why put sends 9 userId's
+  // todo Write tests for front-back and e2e
 
   editForm: FormGroup;
 
@@ -64,12 +66,20 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
 
     const newUser = new User();
     newUser.email = this.editForm.get('email').value;
-    newUser.password = this.editForm.get('password').value;
 
-    this.authService.register(this.user)
+    if (this.editForm.get('password').value !== null) {
+      newUser.password = this.editForm.get('password').value;
+    }
+
+    this.authService.updateUser(newUser)
       .subscribe(
         user => {
-          this.authService.setUser(user);
+          const returnedUser = new User();
+          returnedUser.email = user.email;
+          returnedUser.firstName = user.firstName;
+          returnedUser.secondName = user.secondName;
+
+          this.authService.setUser(returnedUser);
         },
         err => {
           // maybe display a message
@@ -89,10 +99,13 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
 
   onEmailNo() {
     this.emailEditMode = !this.emailEditMode;
+    this.email.reset();
   }
 
   onPasswordNo() {
     this.passwordEditMode = !this.passwordEditMode;
+    this.password.reset();
+    this.passwordTwo.reset();
   }
 
   onEmailYes() {

@@ -6,6 +6,7 @@
         <label for="account-email" class="control-label">Email</label>
         <div [class]="!passwordEditMode ? 'input-group' : ''">
           <input
+            #emailInput
             type="email"
             id="account-email"
             class="form-control"
@@ -22,7 +23,7 @@
             <button id="account-email-edit-no" class="btn" (click)="onEmailNo()">✖</button>
           </span>
         </div>
-        <div *ngIf="email.invalid && email.touched">
+        <div *ngIf="email.invalid && email.touched && !emailInput.readOnly">
           <div id="account-email-required" *ngIf="emailRequiredError()" class="validation-text">Required</div>
           <div id="account-email-valid" *ngIf="validEmailError() && email.value" class="validation-text">Must be a valid email</div>
         </div>
@@ -32,6 +33,7 @@
         <label for="account-password" class="control-label">Password</label>
         <div [class]="!emailEditMode ? 'input-group' : ''">
           <input
+            #passwordInput
             type="password"
             id="account-password"
             class="form-control"
@@ -47,7 +49,7 @@
             <button id="account-password-edit-no" class="btn" (click)="onPasswordNo()">✖</button>
           </span>
         </div>
-        <div *ngIf="password.invalid && password.touched">
+        <div *ngIf="password.invalid && password.touched && !passwordInput.readOnly">
           <div id="password-email-required" *ngIf="passwordRequiredError()" class="validation-text">Required</div>
           <div id="password-email-valid" *ngIf="passwordMinLengthError()" class="validation-text">Must be at least 6 characters long</div>
         </div>
@@ -56,7 +58,7 @@
       <div *ngIf="passwordEditMode" class="form-group">
         <label for="account-password-2" class="control-label">Re-Type Password</label>
         <input type="password" id="account-password-2" class="form-control" [value]="passwordEditMode ? '' : ''" formControlName="passwordTwo">
-        <div *ngIf="passwordTwo.invalid && (passwordTwo.touched || password.touched)">
+        <div *ngIf="(passwordTwo.touched || password.touched)">
           <div id="password-two-email-required" *ngIf="!passwordsMatch()" class="validation-text">Passwords must match</div>
         </div>
       </div>
