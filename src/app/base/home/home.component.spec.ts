@@ -5,6 +5,7 @@ import {AuthenticationService} from '../../services/authentication.service';
 import {TitalisePipe} from '../../shared/pipes/titalise.pipe';
 import {User} from '../../models/user.model';
 import {Observable} from 'rxjs/Observable';
+import {ReactiveFormsModule} from '@angular/forms';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
