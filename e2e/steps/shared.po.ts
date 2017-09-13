@@ -5,6 +5,7 @@ export class SharedSteps {
   until = ExpectedConditions;
 
   isHomePage() {
+    browser.wait(this.until.presenceOf(element(by.tagName('h3'))), 5000);
     const el = element(by.tagName('h3'));
     return el.getText();
   }
