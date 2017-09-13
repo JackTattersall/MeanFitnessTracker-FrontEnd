@@ -132,8 +132,6 @@ describe('AuthenticationService with test bed', () => {
           secondName: 'tester'
         };
 
-        const spy = spyOn(authService, 'getJwt').and.returnValue('12345');
-
         // Set the mock backend to respond with the mock data
         mockBackend.connections.subscribe((connection: MockConnection) => {
           connection.mockRespond(new Response(new ResponseOptions({
@@ -142,7 +140,6 @@ describe('AuthenticationService with test bed', () => {
         });
 
         authService.getUserById('123').subscribe((user) => {
-          expect(spy).toHaveBeenCalled();
           expect(user.firstName).toEqual('test');
           expect(user.secondName).toEqual('tester');
           expect(user.email).toEqual('test@tester');
@@ -162,9 +159,6 @@ describe('AuthenticationService with test bed', () => {
         // Set user to null and isLoggedIn() returns true
         authService.user = null;
         const loggedInSpy: Spy = spyOn(authService, 'isLoggedIn').and.returnValue(true);
-
-        // Create a spy for getJwt that returns 123, as is needed by getUserById
-        const jwtSpy = spyOn(authService, 'getJwt').and.returnValue('123');
 
         // Create response user data
         const userData = {
@@ -198,7 +192,6 @@ describe('AuthenticationService with test bed', () => {
         // Assert
         expect(authService.user).toEqual(expectedUser);
         expect(tempUser).toEqual(expectedUser);
-        expect(jwtSpy).toHaveBeenCalled();
         expect(loggedInSpy).toHaveBeenCalled();
       }));
 

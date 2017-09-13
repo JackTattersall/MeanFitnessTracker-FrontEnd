@@ -10,7 +10,6 @@ import {User} from '../../models/user.model';
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit, OnDestroy {
-  // todo figure out why put sends 9 userId's
   // todo Write tests for front-back and e2e
 
   editForm: FormGroup;
@@ -65,10 +64,10 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     // todo also add 'if loggedIn()' here and redirect to login page if not
 
     const newUser = new User();
-    newUser.email = this.editForm.get('email').value;
+    newUser.email = this.email.value;
 
-    if (this.editForm.get('password').value !== null) {
-      newUser.password = this.editForm.get('password').value;
+    if (this.password.value !== null) {
+      newUser.password = this.password.value;
     }
 
     this.authService.updateUser(newUser)
@@ -82,7 +81,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
           this.authService.setUser(returnedUser);
         },
         err => {
-          // maybe display a message
+          console.error(err);
         }
       );
   }
@@ -129,19 +128,19 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   get passwordTwo() { return this.editForm.get('passwordTwo'); }
 
   emailRequiredError(): boolean {
-    return this.email.errors.required;
+    return this.email.invalid && this.email.errors.required;
   }
 
   validEmailError(): boolean {
-    return this.email.errors.email;
+    return this.email.invalid && this.email.errors.email;
   }
 
   passwordRequiredError(): boolean {
-    return this.password.errors.required;
+    return this.password.invalid && this.password.errors.required;
   }
 
   passwordMinLengthError(): boolean {
-    return this.password.errors.minlength;
+    return this.password.invalid && this.password.errors.minlength;
   }
 
   passwordsMatch(): boolean {

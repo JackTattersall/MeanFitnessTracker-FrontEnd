@@ -13,7 +13,9 @@ export class AuthenticationService {
 
   private headers = new Headers({
     'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    'Accept': 'application/json',
+    'jwt': this.getJwt(),
+    'userId': this.getUserId()
   });
 
   constructor(private http: Http) {
@@ -40,10 +42,8 @@ export class AuthenticationService {
 
   // Gets a user returns an observable
   getUserById(id: string) {
-    const getRequestHeaders = this.headers;
-    getRequestHeaders.append('jwt', this.getJwt());
 
-    return this.http.get(environment.apiUrl + '/users/' + id, {headers: getRequestHeaders})
+    return this.http.get(environment.apiUrl + '/users/' + id, {headers: this.headers})
       .map((response: Response) =>  response.json())
       .catch((err: Response) => Observable.throw(err.json()));
   }
@@ -51,10 +51,8 @@ export class AuthenticationService {
   // Updates a users details
   updateUser(user: User) {
     const body = JSON.stringify(user);
-    const putRequestHeaders = this.headers;
-    putRequestHeaders.append('userId', this.getUserId());
 
-    return this.http.put(environment.apiUrl + '/users', body, {headers: putRequestHeaders})
+    return this.http.put(environment.apiUrl + '/users', body, {headers: this.headers})
       .map((response: Response) => response.json())
       .catch((err: Response) => Observable.throw(err.json()));
   }
