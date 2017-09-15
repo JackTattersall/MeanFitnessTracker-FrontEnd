@@ -10,7 +10,7 @@ import {User} from '../../models/user.model';
   styleUrls: ['./account-details.component.css']
 })
 export class AccountDetailsComponent implements OnInit, OnDestroy {
-  // todo Write tests for front-back and e2e
+  // todo Write tests for e2e
 
   editForm: FormGroup;
 

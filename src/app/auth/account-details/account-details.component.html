@@ -59,7 +59,7 @@
         <label for="account-password-2" class="control-label">Re-Type Password</label>
         <input type="password" id="account-password-2" class="form-control" [value]="passwordEditMode ? '' : ''" formControlName="passwordTwo">
         <div *ngIf="(passwordTwo.touched || password.touched)">
-          <div id="password-two-email-required" *ngIf="!passwordsMatch()" class="validation-text">Passwords must match</div>
+          <div id="account-passwords-must-match" *ngIf="!passwordsMatch()" class="validation-text">Passwords must match</div>
         </div>
       </div>
 

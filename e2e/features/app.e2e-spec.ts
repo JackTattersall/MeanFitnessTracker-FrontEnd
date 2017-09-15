@@ -9,6 +9,9 @@ describe('fitness-tracker App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to Your Fitness Tracker');
+    expect(page.getParagraphText().then((heading) => {
+      return heading.includes('Welcome to Your Fitness Tracker');
+    })).toBeTruthy();
   });
+
 });
