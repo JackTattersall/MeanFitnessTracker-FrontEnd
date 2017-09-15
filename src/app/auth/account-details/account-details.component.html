@@ -50,8 +50,8 @@
           </span>
         </div>
         <div *ngIf="password.invalid && password.touched && !passwordInput.readOnly">
-          <div id="password-email-required" *ngIf="passwordRequiredError()" class="validation-text">Required</div>
-          <div id="password-email-valid" *ngIf="passwordMinLengthError()" class="validation-text">Must be at least 6 characters long</div>
+          <div id="account-password-required" *ngIf="passwordRequiredError()" class="validation-text">Required</div>
+          <div id="account-password-valid" *ngIf="passwordMinLengthError()" class="validation-text">Must be at least 6 characters long</div>
         </div>
       </div>
 

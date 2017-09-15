@@ -72,8 +72,56 @@ describe('fitness-tracker Login', () => {
 
   });
 
-  it('test run', () => {
-    expect(true).toBeTruthy();
+  describe('password fields', () => {
+
+    it('i am on the account page', () => {
+      account.navigateTo();
+    });
+
+    it('the password input should be read only', () => {
+      expect(account.getPasswordOneInput().getAttribute('readonly')).toBeTruthy();
+    });
+
+    it('i click the password edit button', () => {
+      expect(account.passwordEditButton().isPresent()).toBeTruthy();
+      account.passwordEditButton().click();
+    });
+
+    it('the second password input should appear and both should now be editable and empty', () => {
+      expect(account.getPasswordOneInput().getAttribute('readonly')).toBeFalsy();
+      expect(account.getPasswordTwoInput().isPresent()).toBeTruthy();
+      expect(account.getPasswordOneText()).toBe('');
+      expect(account.getPasswordTwoText()).toBe('');
+    });
+
+    it('the password tick and cross buttons should appear with tick being disabled', () => {
+      expect(account.passwordEditYesButton().isPresent()).toBeTruthy();
+      expect(account.passwordEditYesButton().isEnabled()).toBeFalsy();
+      expect(account.passwordEditNoButton().isPresent()).toBeTruthy();
+      expect(account.passwordEditNoButton().isEnabled()).toBeTruthy();
+    });
+
+    it('if i click in the password input, leave empty and click away, required should show', () => {
+      account.getPasswordOneInput().sendKeys('');
+      account.getPasswordTwoInput().click();
+      expect(account.passwordRequiredText()).toBe('Required');
+    });
+
+    it('if i click in the password input, type pass, then min 6 should show', () => {
+      account.getPasswordOneInput().sendKeys('pass');
+      account.getPasswordTwoInput().click();
+      expect(account.passwordValidText()).toBe('Must be at least 6 characters long');
+    });
+
+    it('if i type password in the second password box, passwords must match should show', () => {
+      account.getPasswordTwoInput().sendKeys('password');
+      expect(account.passwordsMustMatchText()).toBe('Passwords must match');
+    });
+
+    it('if i then type password in the first password input then the tick button should enable', () => {
+      account.getPasswordOneInput().sendKeys('password');
+      expect(account.passwordEditYesButton().isEnabled()).toBeTruthy();
+    });
   });
 
 });

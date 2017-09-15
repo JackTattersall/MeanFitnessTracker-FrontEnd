@@ -26,7 +26,7 @@ export class AccountDetailPage {
     return element(by.id('account-password-2')).getAttribute('value');
   }
 
-  getPasswordTwoField() {
+  getPasswordTwoInput() {
     return element(by.id('account-password-2'));
   }
 
@@ -71,6 +71,6 @@ export class AccountDetailPage {
   }
 
   passwordsMustMatchText() {
-    return element(by.id('account-passwords-must-match'));
+    return element(by.id('account-passwords-must-match')).getText();
   }
 }
